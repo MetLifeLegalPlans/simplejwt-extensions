@@ -3,6 +3,7 @@ name = "simplejwt-extensions"
 version = "0.1.0"
 description = ""
 authors = ["Bequest, Inc. <oss@willing.com>"]
+readme = "README.rst"
 
 [tool.poetry.dependencies]
 python = ">=3.6, <3.9"
