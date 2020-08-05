@@ -7,6 +7,10 @@ from .settings import api_settings
 
 
 class JWTAuthentication(SimpleJWTAuthentication):
+    def authenticate(self, request):
+        self.request = request
+        super().authenticate(request)
+
     def get_user(self, validated_token):
         try:
             user_id = validated_token[api_settings.USER_ID_CLAIM]
@@ -18,7 +22,7 @@ class JWTAuthentication(SimpleJWTAuthentication):
         except User.DoesNotExist:
             user = None
             if api_settings.NEW_USER_CALLBACK:
-                user = api_settings.NEW_USER_CALLBACK(user_id)
+                user = api_settings.NEW_USER_CALLBACK(self.request, user_id)
             if user is None:
                 raise AuthenticationFailed(_('User not found'), code='user_not_found')
 
