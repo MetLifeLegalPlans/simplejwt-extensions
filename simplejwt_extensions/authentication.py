@@ -9,7 +9,7 @@ from .settings import api_settings
 class JWTAuthentication(SimpleJWTAuthentication):
     def authenticate(self, request):
         self.request = request
-        super().authenticate(request)
+        return super().authenticate(request)
 
     def get_user(self, validated_token):
         try:
