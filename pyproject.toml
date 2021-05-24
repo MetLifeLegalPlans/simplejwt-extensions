@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simplejwt-extensions"
-version = "0.2.4"
+version = "0.2.5"
 description = ""
 authors = ["Bequest, Inc. <oss@willing.com>"]
 readme = "README.rst"
