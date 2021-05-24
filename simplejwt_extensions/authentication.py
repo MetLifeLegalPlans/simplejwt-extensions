@@ -1,7 +1,7 @@
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.authentication import JWTAuthentication as SimpleJWTAuthentication
 from rest_framework_simplejwt.exceptions import InvalidToken, AuthenticationFailed
-from rest_framework_simplejwt.state import User
 
 from .settings import api_settings
 
@@ -16,6 +16,8 @@ class JWTAuthentication(SimpleJWTAuthentication):
             user_id = validated_token[api_settings.USER_ID_CLAIM]
         except KeyError:
             raise InvalidToken(_('Token contained no recognizable user identification'))
+
+        User = get_user_model()
 
         try:
             user = User.objects.get(**{api_settings.USER_ID_FIELD: user_id})
